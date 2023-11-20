@@ -13,6 +13,7 @@ import models.registerUser.RegisterUnsuccessfulUserResponseModel;
 import models.singleUser.SingleUserResponseModel;
 import models.userList.UserListResponseModel;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -31,6 +32,7 @@ import static specs.RegisterUserSpec.*;
 import static specs.SingleUserSpec.singleRequestSpec;
 import static specs.SingleUserSpec.singleResponseSpec;
 
+@Tag("api")
 public class ReqresIn extends TestBase {
 
 

@@ -60,3 +60,9 @@ tasks.withType(Test) {
         }
     }
 }
+
+task api_test(type: Test){
+    useJUnitPlatform{
+        includeTags("api")
+    }
+}
