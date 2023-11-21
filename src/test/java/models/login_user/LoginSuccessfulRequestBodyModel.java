@@ -1,4 +1,4 @@
-package models.loginUser;
+package models.login_user;
 
 import lombok.Data;
 

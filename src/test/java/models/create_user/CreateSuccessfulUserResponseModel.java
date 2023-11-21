@@ -1,4 +1,4 @@
-package models.createUser;
+package models.create_user;
 
 
 import lombok.Data;
