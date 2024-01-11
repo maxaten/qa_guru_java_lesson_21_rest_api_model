@@ -74,6 +74,7 @@
 ./gradlew clean api_test allureServ
 ```
 
+---
 <a id="allure"></a>
 ## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/></a> <a name="Allure"></a>Отчет [Allure](https://jenkins.autotests.cloud/job/qa_guru_java_api_diplom_maxaten/allure/#)</a>
 
