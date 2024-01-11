@@ -1,7 +1,7 @@
 # Демо проект по автоматизации тестирования сайта API на сайте [**reqres.in**](https://reqres.in/)
 
 <p align="center">
-<img title="reqres.in" src="images/logo/magnum.png">
+<img title="reqres.in" src="images/logo/reqres.png">
 </p>
 
 ---
