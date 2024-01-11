@@ -65,10 +65,10 @@
 </p>
 
 ---
-___
 <a id="console"></a>
 ## Команды для запуска из терминала
-___
+
+
 ***Локальный запуск:***
 ```bash  
 ./gradlew clean api_test allureServ
