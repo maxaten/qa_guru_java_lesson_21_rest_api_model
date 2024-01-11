@@ -71,7 +71,7 @@
 
 ***Локальный запуск:***
 ```bash  
-./gradlew clean api_test allureServ
+./gradlew clean api_test allureServe
 ```
 
 ---
