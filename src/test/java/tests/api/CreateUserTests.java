@@ -24,7 +24,7 @@ public class CreateUserTests extends TestBase {
     @Epic("Регистрация")
     @Story("Регистрация новых пользовательей")
     @Feature("Регистрация по логину")
-    @TmsLink("HOMEWORK-1043")
+    @TmsLink("HOMEWORK-1039")
     @Tags({@Tag("regress"), @Tag("smoke")})
     @Severity(SeverityLevel.CRITICAL)
     public void createUserTest201() {

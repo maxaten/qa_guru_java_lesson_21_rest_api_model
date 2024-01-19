@@ -25,7 +25,7 @@ public class GetUserInfoTests extends TestBase {
     @Epic("Информация о пользователях")
     @Story("Один пользователь")
     @Feature("Получение информации из нескольких источников")
-    @TmsLink("HOMEWORK-1043")
+    @TmsLink("HOMEWORK-1039")
     @Tags({@Tag("regress"), @Tag("smoke")})
     @Severity(SeverityLevel.NORMAL)
     public void singleUserTest200() {
@@ -56,7 +56,7 @@ public class GetUserInfoTests extends TestBase {
     @Epic("Информация о пользователях")
     @Story("Много пользователей")
     @Feature("Получение информации из нескольких источников")
-    @TmsLink("HOMEWORK-1043")
+    @TmsLink("HOMEWORK-1039")
     @Tags({@Tag("regress"), @Tag("smoke")})
     @Severity(SeverityLevel.NORMAL)
     public void listUserTest200() {
