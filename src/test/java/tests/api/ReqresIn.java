@@ -1,15 +1,12 @@
 package tests.api;
 
-import models.create.user.CreateUserRequestModel;
-import models.create.user.CreateUserResponseModel;
-import models.login.user.LoginBodyModel;
-import models.login.user.LoginResponseModel;
-import models.login.user.LoginRequestModel;
-import models.register.user.RegisterResponseModel;
-import models.register.user.RegisterRequestModel;
-import models.register.user.LoginErrorModel;
-import models.single.user.SingleUserResponseModel;
-import models.user.list.UserListResponseModel;
+import models.CreateUserRequestModel;
+import models.CreateUserResponseModel;
+import models.LoginRequestModel;
+import models.LoginResponseModel;
+import models.LoginErrorModel;
+import models.SingleUserResponseModel;
+import models.UserListResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -60,18 +57,18 @@ public class ReqresIn extends TestBase {
     @Test
     @DisplayName("Успешная регистрация пользователя")
     public void registerSuccessfulTest200() {
-        LoginBodyModel register = new LoginBodyModel();
+        LoginRequestModel register = new LoginRequestModel();
         register.setEmail("eve.holt@reqres.in");
         register.setPassword("pistol");
 
-        RegisterResponseModel response = step("Ввод данных для регистрации", () ->
+        LoginResponseModel response = step("Ввод данных для регистрации", () ->
                 given(registerRequestSpec)
                         .body(register)
                         .when()
                         .post("/register")
                         .then()
                         .spec(registerResponseSpec)
-                        .extract().as(RegisterResponseModel.class));
+                        .extract().as(LoginResponseModel.class));
 
         step("Проверка текста ошибки", () ->
                 assertAll(
@@ -82,7 +79,7 @@ public class ReqresIn extends TestBase {
     @Test
     @DisplayName("Неуспешная регистрация пользователя")
     public void registerUnsuccessfulTest400() {
-        RegisterRequestModel request = new RegisterRequestModel();
+        LoginRequestModel request = new LoginRequestModel();
         request.setEmail("sydney@fife");
 
         LoginErrorModel response = step("Ввод данных для регистрации", () ->
@@ -105,7 +102,7 @@ public class ReqresIn extends TestBase {
     @DisplayName("Успешная авторизация пользователя")
     public void loginSuccessfulTest200() {
 
-        LoginBodyModel authBody = new LoginBodyModel();
+        LoginRequestModel authBody = new LoginRequestModel();
         authBody.setEmail("eve.holt@reqres.in");
         authBody.setPassword("cityslicka");
 
