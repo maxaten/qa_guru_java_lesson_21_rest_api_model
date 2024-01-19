@@ -24,7 +24,7 @@ public class AuthorizationTests extends TestBase {
     @Owner("Maksim A")
     @Epic("Авторизация")
     @Story("Авторизация пользователей по логину и паролю")
-    @TmsLink("HOMEWORK-1043")
+    @TmsLink("HOMEWORK-1039")
     @Severity(SeverityLevel.CRITICAL)
     @Tags({@Tag("regress"), @Tag("smoke")})
     public void registerSuccessfulTest200() {
@@ -53,7 +53,7 @@ public class AuthorizationTests extends TestBase {
     @Owner("Maksim A")
     @Epic("Авторизация")
     @Story("Авторизация пользователей по логину и паролю")
-    @TmsLink("HOMEWORK-1043")
+    @TmsLink("HOMEWORK-1039")
     @Tags({@Tag("regress"), @Tag("smoke")})
     @Severity(SeverityLevel.CRITICAL)
     public void registerUnsuccessfulTest400() {
@@ -80,7 +80,7 @@ public class AuthorizationTests extends TestBase {
     @Owner("Maksim A")
     @Epic("Авторизация")
     @Story("Авторизация пользователей по логину и паролю")
-    @TmsLink("HOMEWORK-1043")
+    @TmsLink("HOMEWORK-1039")
     @Tags({@Tag("regress"), @Tag("smoke")})
     @Severity(SeverityLevel.CRITICAL)
     public void loginSuccessfulTest200() {
@@ -110,7 +110,7 @@ public class AuthorizationTests extends TestBase {
     @Epic("Авторизация")
     @Story("Авторизация пользователей по логину и паролю")
     @Feature("Изменение кнопок")
-    @TmsLink("HOMEWORK-1043")
+    @TmsLink("HOMEWORK-1039")
     @Tags({@Tag("regress"), @Tag("smoke")})
     @Severity(SeverityLevel.CRITICAL)
     public void loginUnsuccessfulTest400() {
