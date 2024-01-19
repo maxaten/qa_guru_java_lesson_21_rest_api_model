@@ -1,5 +1,4 @@
-package models.user_list;
-
+package models;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
