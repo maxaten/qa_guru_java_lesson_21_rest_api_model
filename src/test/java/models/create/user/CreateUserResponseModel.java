@@ -1,10 +1,10 @@
-package models.create_user;
+package models.create.user;
 
 
 import lombok.Data;
 
 @Data
-public class CreateSuccessfulUserResponseModel {
+public class CreateUserResponseModel {
 
     private String name, job, id, createdAt;
 

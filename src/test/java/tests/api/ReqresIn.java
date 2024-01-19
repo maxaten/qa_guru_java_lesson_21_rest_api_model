@@ -1,17 +1,15 @@
 package tests.api;
 
-import models.create_user.CreateSuccessfulUserRequestModel;
-import models.create_user.CreateSuccessfulUserResponseModel;
-import models.login_user.LoginSuccessfulRequestBodyModel;
-import models.login_user.LoginSuccessfulResponseModel;
-import models.login_user.LoginUnsuccessfulRequestModel;
-import models.login_user.LoginUnsuccessfulResponseModel;
-import models.register_user.RegisterSuccessfulUserRequestModel;
-import models.register_user.RegisterSuccessfulUserResponseModel;
-import models.register_user.RegisterUnsuccessfulUserRequestModel;
-import models.register_user.RegisterUnsuccessfulUserResponseModel;
-import models.single_user.SingleUserResponseModel;
-import models.user_list.UserListResponseModel;
+import models.create.user.CreateUserRequestModel;
+import models.create.user.CreateUserResponseModel;
+import models.login.user.LoginBodyModel;
+import models.login.user.LoginResponseModel;
+import models.login.user.LoginRequestModel;
+import models.register.user.RegisterResponseModel;
+import models.register.user.RegisterRequestModel;
+import models.register.user.LoginErrorModel;
+import models.single.user.SingleUserResponseModel;
+import models.user.list.UserListResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -62,18 +60,18 @@ public class ReqresIn extends TestBase {
     @Test
     @DisplayName("Успешная регистрация пользователя")
     public void registerSuccessfulTest200() {
-        RegisterSuccessfulUserRequestModel register = new RegisterSuccessfulUserRequestModel();
+        LoginBodyModel register = new LoginBodyModel();
         register.setEmail("eve.holt@reqres.in");
         register.setPassword("pistol");
 
-        RegisterSuccessfulUserResponseModel response = step("Ввод данных для регистрации", () ->
+        RegisterResponseModel response = step("Ввод данных для регистрации", () ->
                 given(registerRequestSpec)
                         .body(register)
                         .when()
                         .post("/register")
                         .then()
                         .spec(registerResponseSpec)
-                        .extract().as(RegisterSuccessfulUserResponseModel.class));
+                        .extract().as(RegisterResponseModel.class));
 
         step("Проверка текста ошибки", () ->
                 assertAll(
@@ -84,10 +82,10 @@ public class ReqresIn extends TestBase {
     @Test
     @DisplayName("Неуспешная регистрация пользователя")
     public void registerUnsuccessfulTest400() {
-        RegisterUnsuccessfulUserRequestModel request = new RegisterUnsuccessfulUserRequestModel();
+        RegisterRequestModel request = new RegisterRequestModel();
         request.setEmail("sydney@fife");
 
-        RegisterUnsuccessfulUserResponseModel response = step("Ввод данных для регистрации", () ->
+        LoginErrorModel response = step("Ввод данных для регистрации", () ->
                 given(registerRequestSpec)
                         .body(request)
                         .when()
@@ -95,7 +93,7 @@ public class ReqresIn extends TestBase {
                         .post("/register")
                         .then()
                         .spec(unsuccessfulRegisterResponseSpec)
-                        .extract().as(RegisterUnsuccessfulUserResponseModel.class));
+                        .extract().as(LoginErrorModel.class));
 
         step("Проверка текста ошибки", () ->
                 assertEquals("Missing password", response.getError(), "Текст ошибки не совпадает"));
@@ -107,18 +105,18 @@ public class ReqresIn extends TestBase {
     @DisplayName("Успешная авторизация пользователя")
     public void loginSuccessfulTest200() {
 
-        LoginSuccessfulRequestBodyModel authBody = new LoginSuccessfulRequestBodyModel();
+        LoginBodyModel authBody = new LoginBodyModel();
         authBody.setEmail("eve.holt@reqres.in");
         authBody.setPassword("cityslicka");
 
-        LoginSuccessfulResponseModel response = step("Ввод данных для авторизации", () ->
+        LoginResponseModel response = step("Ввод данных для авторизации", () ->
                 given(loginRequestSpec)
                         .body(authBody)
                         .when()
                         .post("/login")
                         .then()
                         .spec(loginResponseSpec)
-                        .extract().as(LoginSuccessfulResponseModel.class));
+                        .extract().as(LoginResponseModel.class));
 
         step("Получение токена", () ->
                 assertEquals("QpwL5tke4Pnpja7X4", response.getToken()));
@@ -128,17 +126,17 @@ public class ReqresIn extends TestBase {
     @Test
     @DisplayName("Неуспешная авторизация пользователя")
     public void loginUnsuccessfulTest400() {
-        LoginUnsuccessfulRequestModel unAuthEmail = new LoginUnsuccessfulRequestModel();
+        LoginRequestModel unAuthEmail = new LoginRequestModel();
         unAuthEmail.setEmail("peter@klaven");
 
-        LoginUnsuccessfulResponseModel response = step("Ввод данных для авторизации", () ->
+        LoginErrorModel response = step("Ввод данных для авторизации", () ->
                 given(loginRequestSpec)
                         .body(unAuthEmail)
                         .when()
                         .post("/login")
                         .then()
                         .spec(unsuccessfulLoginResponseSpec)
-                        .extract().as(LoginUnsuccessfulResponseModel.class));
+                        .extract().as(LoginErrorModel.class));
 
         step("Проверка текста ошибки", () ->
                 assertEquals("Missing password", response.getError(), "Текст ошибки не совпадает"));
@@ -148,19 +146,19 @@ public class ReqresIn extends TestBase {
     @Test
     @DisplayName("Успешное создание пользователя")
     public void createUserTest201() {
-        CreateSuccessfulUserRequestModel requestBody = new CreateSuccessfulUserRequestModel();
+        CreateUserRequestModel requestBody = new CreateUserRequestModel();
 
         requestBody.setName("morpheus");
         requestBody.setJob("leader");
 
-        CreateSuccessfulUserResponseModel responseBody = step("Ввод данных для создания пользователя", ()->
+        CreateUserResponseModel responseBody = step("Ввод данных для создания пользователя", ()->
                 given(createRequestSpec)
                         .body(requestBody)
                         .when()
                         .post("/users")
                         .then()
                         .spec(createResponseSpec)
-                        .extract().as(CreateSuccessfulUserResponseModel.class));
+                        .extract().as(CreateUserResponseModel.class));
 
         step("Проверка совпадения имени и должности", () ->
                 assertAll(

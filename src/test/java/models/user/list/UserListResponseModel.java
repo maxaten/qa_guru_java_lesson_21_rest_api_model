@@ -1,4 +1,4 @@
-package models.user_list;
+package models.user.list;
 
 
 
