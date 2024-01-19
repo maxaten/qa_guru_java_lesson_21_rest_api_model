@@ -18,14 +18,8 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.CreateUserSpec.createRequestSpec;
-import static specs.CreateUserSpec.createResponseSpec;
-import static specs.ListUsersSpec.listUsersRequestSpec;
-import static specs.ListUsersSpec.listUsersResponseSpec;
-import static specs.LoginUserSpec.*;
-import static specs.RegisterUserSpec.*;
-import static specs.SingleUserSpec.singleRequestSpec;
-import static specs.SingleUserSpec.singleResponseSpec;
+import static specs.ResponseSpec.responseSpec;
+import static specs.RequestSpec.requestSpec;
 
 @Tag("api")
 public class ReqresIn extends TestBase {
@@ -37,12 +31,13 @@ public class ReqresIn extends TestBase {
 
         SingleUserResponseModel user = step("Запрос данных по пользователю", () ->
 
-        given(singleRequestSpec)
-                .when()
-                .get("/users/2")
-                .then()
-                .spec(singleResponseSpec)
-                .extract().as(SingleUserResponseModel.class));
+                given(requestSpec)
+                        .when()
+                        .get("/users/2")
+                        .then()
+                        .spec(responseSpec)
+                        .statusCode(200)
+                        .extract().as(SingleUserResponseModel.class));
 
         step("Проверка информации пользователя", () ->
                 assertAll(
@@ -62,12 +57,13 @@ public class ReqresIn extends TestBase {
         register.setPassword("pistol");
 
         LoginResponseModel response = step("Ввод данных для регистрации", () ->
-                given(registerRequestSpec)
+                given(requestSpec)
                         .body(register)
                         .when()
                         .post("/register")
                         .then()
-                        .spec(registerResponseSpec)
+                        .spec(responseSpec)
+                        .statusCode(200)
                         .extract().as(LoginResponseModel.class));
 
         step("Проверка текста ошибки", () ->
@@ -83,19 +79,19 @@ public class ReqresIn extends TestBase {
         request.setEmail("sydney@fife");
 
         LoginErrorModel response = step("Ввод данных для регистрации", () ->
-                given(registerRequestSpec)
+                given(requestSpec)
                         .body(request)
                         .when()
                         .contentType(JSON)
                         .post("/register")
                         .then()
-                        .spec(unsuccessfulRegisterResponseSpec)
+                        .spec(responseSpec)
+                        .statusCode(400)
                         .extract().as(LoginErrorModel.class));
 
         step("Проверка текста ошибки", () ->
                 assertEquals("Missing password", response.getError(), "Текст ошибки не совпадает"));
     }
-
 
 
     @Test
@@ -107,12 +103,13 @@ public class ReqresIn extends TestBase {
         authBody.setPassword("cityslicka");
 
         LoginResponseModel response = step("Ввод данных для авторизации", () ->
-                given(loginRequestSpec)
+                given(requestSpec)
                         .body(authBody)
                         .when()
                         .post("/login")
                         .then()
-                        .spec(loginResponseSpec)
+                        .spec(responseSpec)
+                        .statusCode(200)
                         .extract().as(LoginResponseModel.class));
 
         step("Получение токена", () ->
@@ -127,12 +124,13 @@ public class ReqresIn extends TestBase {
         unAuthEmail.setEmail("peter@klaven");
 
         LoginErrorModel response = step("Ввод данных для авторизации", () ->
-                given(loginRequestSpec)
+                given(requestSpec)
                         .body(unAuthEmail)
                         .when()
                         .post("/login")
                         .then()
-                        .spec(unsuccessfulLoginResponseSpec)
+                        .spec(responseSpec)
+                        .statusCode(400)
                         .extract().as(LoginErrorModel.class));
 
         step("Проверка текста ошибки", () ->
@@ -148,13 +146,14 @@ public class ReqresIn extends TestBase {
         requestBody.setName("morpheus");
         requestBody.setJob("leader");
 
-        CreateUserResponseModel responseBody = step("Ввод данных для создания пользователя", ()->
-                given(createRequestSpec)
+        CreateUserResponseModel responseBody = step("Ввод данных для создания пользователя", () ->
+                given(requestSpec)
                         .body(requestBody)
                         .when()
                         .post("/users")
                         .then()
-                        .spec(createResponseSpec)
+                        .spec(responseSpec)
+                        .statusCode(201)
                         .extract().as(CreateUserResponseModel.class));
 
         step("Проверка совпадения имени и должности", () ->
@@ -168,24 +167,24 @@ public class ReqresIn extends TestBase {
     @DisplayName("Получения списка пользователей")
     public void listUserTest200() {
         UserListResponseModel response = step("Ввод данных для запроса списка пользователей", () ->
-                given(listUsersRequestSpec)
+                given(requestSpec)
                         .when()
                         .get("users?page=2")
                         .then()
-                        .spec(listUsersResponseSpec)
+                        .spec(responseSpec)
                         .statusCode(200)
                         .extract().as(UserListResponseModel.class));
 
         step("Проверка данных ответа", () ->
-            assertAll(
-                    () -> assertEquals(2, response.getPage()),
-                    () -> assertEquals(6, response.getPerPage()),
-                    () -> assertEquals(12, response.getTotal()),
-                    () -> assertEquals(2, response.getTotalPages())
-            ));
+                assertAll(
+                        () -> assertEquals(2, response.getPage()),
+                        () -> assertEquals(6, response.getPerPage()),
+                        () -> assertEquals(12, response.getTotal()),
+                        () -> assertEquals(2, response.getTotalPages())
+                ));
 
 
-        step("Проверка данных о первом первого пользователя", () -> {
+        step("Проверка данных первого пользователя", () -> {
             List<UserListResponseModel.DataList> data = response.getData();
             assertAll(
                     () -> assertEquals(8, data.get(1).getId(), "Не совпадает ID"),

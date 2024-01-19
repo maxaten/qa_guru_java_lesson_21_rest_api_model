@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class SingleUserResponseModel {
 
-        private UserData data;
-        private SupportData support;
+    private UserData data;
+    private SupportData support;
 
 
     @Data
