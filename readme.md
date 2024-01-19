@@ -40,8 +40,8 @@
 <a href="https://junit.org/junit5/"><img src="images/logo/JUnit5.svg" title="JUnit5" width="50" height="50"  alt="JUnit 5"/></a>  
 <a href="https://gradle.org/"><img src="images/logo/gradle-plain.svg" title="Gradle" width="50" height="50"  alt="Gradle"/></a>  
 <a href="https://selenide.org/"><img src="images/logo/Selenide.svg" title="Selenide" width="50" height="50"  alt="Selenide"/></a>  
-<a href="https://selenide.org/"><img src="images/logo/RestAssured.png" title="RestAssured" width="50" height="50"  alt="Selenide"/></a>  
-<a href="ht[images](images)tps://github.com/allure-framework/allure2"><img src="images/logo/Allure.svg" title="Allure" width="50" height="50"  alt="Allure"/></a> 
+<a href="https://rest-assured.io/"><img src="images/logo/RestAssured.png" title="RestAssured" width="50" height="50"  alt="Selenide"/></a>  
+<a href="https://allurereport.org/"><img src="images/logo/Allure.svg" title="Allure" width="50" height="50"  alt="Allure report"/></a> 
 <a href="https://qameta.io/"><img src="images/logo/Allure2.svg" title="Allure TestOps" width="50" height="50" alt="Allure TestOps"/></a>   
 <a href="https://www.jenkins.io/"><img src="images/logo/Jenkins.svg" title="Jenkins" width="50" height="50"  alt="Jenkins"/></a>  
 <a href="https://www.atlassian.com/ru/software/jira/"><img src="images/logo/Jira.svg" title="Jira" width="50" height="50"  alt="Jira"/></a>
@@ -53,6 +53,7 @@
   Selenide</code>.
 * Использованы фреймворк <code>JUnit 5</code>.
 * В качестве сборщика был использован - <code>Gradle</code>.
+* Для тестирования Api была использована библиотека <code>RestAssured</code>.
 * Для удаленного запуска реализована джоба в <code>Jenkins</code> с формированием отчета в <code>Allure</code> и
   отправкой результатов в <code>Telegram</code> c помощью бота.
 * Осуществлена интеграция с <code>Allure TestOps</code> с <code>Jenkins</code>, при которой возможен запуск тестов
